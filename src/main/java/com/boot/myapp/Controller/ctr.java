@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,7 +56,7 @@ public class ctr {
     }
 
     @DeleteMapping("/book/{id}")
-    public boolean deketeBook(@PathVariable int id) {
+    public boolean deleteBook(@PathVariable int id) {
         boolean status = false;
         // book=book.stream().filter(e ->e.getId()!=id).collect(Collectors.toList());
         for (int i = 0; i < book.size(); i++) {
@@ -69,4 +70,25 @@ public class ctr {
         return status;
 
     }
+
+    @PutMapping("/book/{id}")
+    public Book updateBook(@RequestBody Book updatedbook, @PathVariable int id) {
+        for (Book b : book) {
+            if (b.getId() == id) {
+
+                if (updatedbook.getId() != 0)
+                    b.setId(updatedbook.getId());
+                if (updatedbook.getName() != "" && updatedbook.getName() != null)
+                    b.setName(updatedbook.getName());
+                if (updatedbook.getDec() != null && updatedbook.getDec() != "")
+                    b.setDec(updatedbook.getDec());
+                return b;
+
+            }
+
+        }
+
+        return null;
+    }
+
 }

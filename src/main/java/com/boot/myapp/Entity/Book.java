@@ -39,4 +39,9 @@ public class Book {
         return Dec;
     }
 
+    public Book(int id, String name) {
+        this.id = id;
+        Name = name;
+    }
+
 }
